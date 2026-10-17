@@ -32,6 +32,8 @@ class Property(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ثبت")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="تاریخ بروزرسانی")
 
+    image = models.ImageField(upload_to='properties/', blank=True, null=True, verbose_name="تصویر اصلی ملک")
+
     def __str__(self):
         return f"{self.title} - {self.get_transaction_type_display()}"
 
