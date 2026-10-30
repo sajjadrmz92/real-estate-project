@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ property.title }} - جزئیات ملک</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background-color: #f4f6f9; padding: 20px; direction: rtl; }
+        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .property-img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+        .price { font-size: 1.5rem; color: #27ae60; font-weight: bold; margin: 15px 0; }
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; background: #f8f9fa; padding: 15px; border-radius: 8px; }
+        .description { line-height: 1.8; color: #444; margin-top: 20px; }
+        .back-btn { display: inline-block; margin-top: 20px; text-decoration: none; background: #3498db; color: #fff; padding: 10px 20px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if property.image %}
+            <img src="{{ property.image.url }}" alt="{{ property.title }}" class="property-img">
+        {% endif %}
+        
+        <h1>{{ property.title }}</h1>
+        <p class="price">قیمت: {{ property.price }} تومان</p>
+        
+        <div class="info-grid">
+            <div><strong>نوع معامله:</strong> {{ property.get_transaction_type_display }}</div>
+            <div><strong>نوع ملک:</strong> {{ property.get_property_type_display }}</div>
+            <div><strong>شهر:</strong> {{ property.city }}</div>
+            <div><strong>متراژ:</strong> {{ property.area }} متر مربع</div>
+            <div><strong>تعداد اتاق خواب:</strong> {{ property.bedrooms }}</div>
+            <div><strong>آدرس:</strong> {{ property.address }}</div>
+        </div>
+
+        <h3>توضیحات ملک:</h3>
+        <p class="description">{{ property.description|linebreaks }}</p>
+
+        <a href="{% url 'property_list' %}" class="back-btn">← بازگشت به لیست املاک</a>
+    </div>
+</body>
+</html>
